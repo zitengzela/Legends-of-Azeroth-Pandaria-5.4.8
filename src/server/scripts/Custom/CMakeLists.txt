@@ -11,8 +11,7 @@
 
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
-  Custom/emo_stone.cpp
-  Custom/emo_teleporter.cpp
+  
 )
 
 message("  -> Prepared: Custom")
