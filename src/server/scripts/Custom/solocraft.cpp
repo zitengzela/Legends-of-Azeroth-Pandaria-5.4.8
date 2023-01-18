@@ -1,23 +1,3 @@
-<<<<<<< Updated upstream
-/*
-* This file is part of the Pandaria 5.4.8 Project. See THANKS file for Copyright information
-*
-* This program is free software; you can redistribute it and/or modify it
-* under the terms of the GNU General Public License as published by the
-* Free Software Foundation; either version 2 of the License, or (at your
-* option) any later version.
-*
-* This program is distributed in the hope that it will be useful, but WITHOUT
-* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-* more details.
-*
-* You should have received a copy of the GNU General Public License along
-* with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
-
-=======
->>>>>>> Stashed changes
 #include <map>
 #include "Config.h"
 #include "DatabaseEnv.h"
@@ -431,11 +411,7 @@ public:
 
     void OnGiveXP(Player* /*player*/, uint32& amount, Unit* /*victim*/) override
     {
-<<<<<<< Updated upstream
-        if (SolocraftXPBalancingEnabled) 
-=======
         if (SolocraftXPBalancingEnabled)
->>>>>>> Stashed changes
         {
             amount = uint32(amount * SoloCraftXPMod);
         }
@@ -555,11 +531,7 @@ private:
     {
         if (difficulty != 0)
         {
-<<<<<<< Updated upstream
-            std::ostringstream msg_ru, msg_en;
-=======
             std::ostringstream msg_en, msg_fr;
->>>>>>> Stashed changes
 
             int SpellPowerBonus = 0;
 
@@ -651,31 +623,14 @@ private:
                 {
                     if (!SolocraftXPEnabled)
                     {
-<<<<<<< Updated upstream
-                        msg_ru << "|cffFF0000[СолоКрафт] |cffFF8000Игрок " << player->GetName() << " вошел в %s - Изменение сложности: %0.2f. Бонус к силе заклинаний: %i. Балансировочное значение класса: %i. Получение опыта: |cffFF0000Отключено";
-                        msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - Difficulty Offset: %0.2f. Spellpower Bonus: %i. Class Balance Weight: %i. XP Gain: |cffFF0000Disabled";
-                        ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_ru.str().c_str(), msg_en.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus, classBalance);
-=======
                         msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - Difficulty Offset: %0.2f. Spellpower Bonus: %i. Class Balance Weight: %i. XP Gain: |cffFF0000Disabled";
                         msg_fr << "|cffFF0000[SoloCraft] |cffFF8000Joueur " << player->GetName() << " inscrit sur %s - Compensation de difficulté: %0.2f. Bonus de puissance des sorts: %i. Poids de la classe Balance: %i. Gain d'XP: |cffFF0000Désactivé";
                         ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_en.str().c_str(), msg_fr.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus, classBalance);
->>>>>>> Stashed changes
                     }
                     else
                     {
                         if (!SolocraftXPBalancingEnabled)
                         {
-<<<<<<< Updated upstream
-                            msg_ru << "|cffFF0000[СолоКрафт] |cffFF8000Игрок " << player->GetName() << " вошел в %s - Изменение сложности: %0.2f. Бонус к силе заклинаний: %i. Балансировочное значение класса: %i. Баланс опыта: |cffFF0000Отключен";
-                            msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - Difficulty Offset: %0.2f. Spellpower Bonus: %i. Class Balance Weight: %i. XP Balancing: |cffFF0000Disabled";
-                            ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_ru.str().c_str(), msg_en.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus, classBalance);
-                        }
-                        else
-                        {
-                            msg_ru << "|cffFF0000[СолоКрафт] |cffFF8000Игрок " << player->GetName() << " вошел в %s - Изменение сложности: %0.2f. Бонус к силе заклинаний: %i. Балансировочное значение класса: %i. Баланс опыта: |cff4CFF00Включен";
-                            msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - Difficulty Offset: %0.2f. Spellpower Bonus: %i. Class Balance Weight: %i. XP Balancing: |cff4CFF00Enabled";
-                            ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_ru.str().c_str(), msg_en.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus, classBalance);
-=======
                             msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - Difficulty Offset: %0.2f. Spellpower Bonus: %i. Class Balance Weight: %i. XP Balancing: |cffFF0000Disabled";
                             msg_fr << "|cffFF0000[SoloCraft] |cffFF8000Joueur " << player->GetName() << " inscrit sur %s - Compensation de difficulté: %0.2f. Bonus de puissance des sorts: %i. Poids de la classe Balance: %i. Équilibrage de l'XP: |cffFF0000Désactivé";
                             ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_en.str().c_str(), msg_fr.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus, classBalance);
@@ -685,7 +640,6 @@ private:
                             msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - Difficulty Offset: %0.2f. Spellpower Bonus: %i. Class Balance Weight: %i. XP Balancing: |cff4CFF00Enabled";
                             msg_fr << "|cffFF0000[SoloCraft] |cffFF8000Joueur " << player->GetName() << " inscrit sur %s - Compensation de difficulté: %0.2f. Bonus de puissance des sorts: %i. Poids de la classe Balance: %i. Équilibrage de l'XP: |cff4CFF00Activé";
                             ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_en.str().c_str(), msg_fr.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus, classBalance);
->>>>>>> Stashed changes
                         }
                     }
                 }
@@ -693,17 +647,6 @@ private:
                 {
                     if (!SolocraftXPBalancingEnabled && SolocraftXPEnabled)
                     {
-<<<<<<< Updated upstream
-                        msg_ru << "|cffFF0000[СолоКрафт] |cffFF8000Игрок " << player->GetName() << " вошел в %s - |cffFF0000ПОМНИТЕ - Вы не получили дебафф по изменению сложности: %0.2f с балансировочным значением класса: %i. |cffFF8000Член группы, уже находящийся внутри подземелья, получил бафф по изменению сложности. Для заклинателей не применен бонус к силе заклинаний. ВСЕ члены группы должны выйти из подземелья и войти снова, чтобы получить изменение баланса.";
-                        msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - |cffFF0000BE ADVISED - You have been debuffed by offset: %0.2f with a Class Balance Weight: %i. |cffFF8000A group member already inside has the dungeon's full buff offset. No Spellpower buff will be applied to spell casters. ALL group members must exit the dungeon and re-enter to receive a balanced offset.";
-                        ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_ru.str().c_str(), msg_en.str().c_str()), map->GetMapName(), difficulty, classBalance);
-                    }
-                    else
-                    {
-                        msg_ru << "|cffFF0000[СолоКрафт] |cffFF8000Игрок " << player->GetName() << " вошел в %s - |cffFF0000ПОМНИТЕ - Вы не получили дебафф по изменению сложности: %0.2f с балансировочным значением класса: %i и не будете получать опыт. |cffFF8000Член группы, уже находящийся внутри подземелья, получил бафф по изменению сложности. Для заклинателей не применен бонус к силе заклинаний. ВСЕ члены группы должны выйти из подземелья и войти снова, чтобы получить изменение баланса.";
-                        msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - |cffFF0000BE ADVISED - You have been debuffed by offset: %0.2f with a Class Balance Weight: %i and no XP will be awarded. |cffFF8000A group member already inside has the dungeon's full buff offset. No Spellpower buff will be applied to spell casters. ALL group members must exit the dungeon and re-enter to receive a balanced offset.";
-                        ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_ru.str().c_str(), msg_en.str().c_str()), map->GetMapName(), difficulty, classBalance);
-=======
                         msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - |cffFF0000BE ADVISED - You have been debuffed by offset: %0.2f with a Class Balance Weight: %i. |cffFF8000A group member already inside has the dungeon's full buff offset. No Spellpower buff will be applied to spell casters. ALL group members must exit the dungeon and re-enter to receive a balanced offset.";
                         msg_fr << "|cffFF0000[SoloCraft] |cffFF8000Joueur " << player->GetName() << " inscrit sur %s - |cffFF0000BE CONSEILS - Vous avez été débuffé par un décalage: %0.2f avec un poids d'équilibre de classe: %i. |cffFF8000Un membre du groupe qui se trouve déjà à l'intérieur bénéficie du décalage complet des buffs du donjon. Aucun buff de puissance des sorts ne sera appliqué aux lanceurs de sorts. TOUS les membres du groupe doivent sortir du donjon et y rentrer pour bénéficier d'un décalage équilibré.";
                         ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_en.str().c_str(), msg_fr.str().c_str()), map->GetMapName(), difficulty, classBalance);
@@ -713,7 +656,6 @@ private:
                         msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - |cffFF0000BE ADVISED - You have been debuffed by offset: %0.2f with a Class Balance Weight: %i and no XP will be awarded. |cffFF8000A group member already inside has the dungeon's full buff offset. No Spellpower buff will be applied to spell casters. ALL group members must exit the dungeon and re-enter to receive a balanced offset.";
                         msg_fr << "|cffFF0000[SoloCraft] |cffFF8000Joueur " << player->GetName() << " inscrit sur %s - |cffFF0000BE CONSEILS - Vous avez été débuffé par un décalage: %0.2f avec un poids d'équilibre de classe: %i et aucun XP ne sera attribué. |cffFF8000Un membre du groupe qui se trouve déjà à l'intérieur bénéficie du décalage complet des buffs du donjon. Aucun buff de puissance des sorts ne sera appliqué aux lanceurs de sorts. TOUS les membres du groupe doivent sortir du donjon et y rentrer pour bénéficier d'un décalage équilibré.";
                         ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_en.str().c_str(), msg_fr.str().c_str()), map->GetMapName(), difficulty, classBalance);
->>>>>>> Stashed changes
                     }
                 }
 
@@ -721,15 +663,9 @@ private:
             }
             else
             {
-<<<<<<< Updated upstream
-                msg_ru << "|cffFF0000[СолоКрафт] |cffFF8000Игрок " << player->GetName() << " вошел в %s - |cffFF0000Вы не получили бафф.|r |cffFF8000Ваш уровень выше максимального уровня, (%i) порог этого подземелья.";
-                msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - |cffFF0000You have not been buffed.|r |cffFF8000Your level is higher than the max level (%i) threshold for this dungeon.";
-                ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_ru.str().c_str(), msg_en.str().c_str()), map->GetMapName(), dunLevel + SolocraftLevelDiff);
-=======
                 msg_en << "|cffFF0000[SoloCraft] |cffFF8000Player " << player->GetName() << " entered %s - |cffFF0000You have not been buffed.|r |cffFF8000Your level is higher than the max level (%i) threshold for this dungeon.";
                 msg_fr << "|cffFF0000[SoloCraft] |cffFF8000Joueur " << player->GetName() << " inscrit sur %s - |cffFF0000Vous n'avez pas été mis en valeur.|r |cffFF8000Votre niveau est supérieur au niveau maximum (%i) pour ce donjon.";
                 ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_en.str().c_str(), msg_fr.str().c_str()), map->GetMapName(), dunLevel + SolocraftLevelDiff);
->>>>>>> Stashed changes
                 ClearBuffs(player, map);
             }
         }
@@ -779,17 +715,10 @@ private:
             float StatsMultPct = (*result)[4].GetFloat();
             SoloCraftXPMod = 1.0;
 
-<<<<<<< Updated upstream
-            std::ostringstream msg_ru, msg_en;
-            msg_ru << "|cffFF0000[СолоКрафт]|r |cffFF8000" << player->GetName() << " покинул %s - Возврат изменения сложности: %0.2f. Бонус к силе заклинаний удален: %i";
-            msg_en << "|cffFF0000[SoloCraft]|r |cffFF8000" << player->GetName() << " exited to %s - Reverting Difficulty Offset: %0.2f. Spellpower Bonus Removed: %i";
-            ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_ru.str().c_str(), msg_en.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus);
-=======
             std::ostringstream msg_en, msg_fr;
             msg_en << "|cffFF0000[SoloCraft]|r |cffFF8000" << player->GetName() << " exited to %s - Reverting Difficulty Offset: %0.2f. Spellpower Bonus Removed: %i";
             msg_fr << "|cffFF0000[SoloCraft]|r |cffFF8000" << player->GetName() << " sorti pour %s - Rétablissement de la compensation de la difficulté: %0.2f. Suppression du bonus de puissance des sorts: %i";
             ChatHandler(player->GetSession()).PSendSysMessage(GetText(player, msg_en.str().c_str(), msg_fr.str().c_str()), map->GetMapName(), difficulty, SpellPowerBonus);
->>>>>>> Stashed changes
 
             for (int32 i = STAT_STRENGTH; i < MAX_STATS; ++i)
             {
@@ -818,8 +747,4 @@ void AddSC_solocraft_system()
     new solocraft_system_config();
     new solocraft_system_announce();
     new solocraft_system_player_instance_handler();
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
