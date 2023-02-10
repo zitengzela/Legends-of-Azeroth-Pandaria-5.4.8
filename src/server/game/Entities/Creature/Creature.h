@@ -23,7 +23,6 @@
 #include "UpdateMask.h"
 #include "ItemPrototype.h"
 #include "LootMgr.h"
-#include "DatabaseEnv.h"
 #include "Cell.h"
 
 #include <list>
@@ -232,7 +231,7 @@ struct CreatureLocale
 {
     StringVector Name;
     StringVector FemaleName;
-    StringVector SubName;
+    StringVector Title;
 };
 
 struct PointOfInterestLocale

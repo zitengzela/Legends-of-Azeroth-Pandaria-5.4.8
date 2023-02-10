@@ -35,6 +35,7 @@
 #include "World.h"
 #include "AccountMgr.h"
 #include "AchievementMgr.h"
+#include "AuctionHouseBot.h"
 #include "AuctionHouseMgr.h"
 #include "BlackMarketMgr.h"
 #include "ObjectMgr.h"
@@ -1392,6 +1393,9 @@ void World::LoadConfigSettings(bool reload)
 
     m_int_configs[CONFIG_PACKET_SPOOF_BANDURATION] = sConfigMgr->GetIntDefault("PacketSpoof.BanDuration", 86400);
 
+    // AHBot
+    m_int_configs[CONFIG_AHBOT_UPDATE_INTERVAL] = sConfigMgr->GetIntDefault("AuctionHouseBot.Update.Interval", 20);
+
     m_bool_configs[CONFIG_CALCULATE_CREATURE_ZONE_AREA_DATA] = sConfigMgr->GetBoolDefault("Calculate.Creature.Zone.Area.Data", false);
     m_bool_configs[CONFIG_CALCULATE_GAMEOBJECT_ZONE_AREA_DATA] = sConfigMgr->GetBoolDefault("Calculate.Gameoject.Zone.Area.Data", false);
 
@@ -1771,7 +1775,10 @@ void World::SetInitialWorldSettings()
     sObjectMgr->LoadCreatureLocales();
     sObjectMgr->LoadGameObjectLocales();
     sObjectMgr->LoadItemLocales();
-    sObjectMgr->LoadQuestLocales();
+    sObjectMgr->LoadQuestTemplateLocale();
+    sObjectMgr->LoadQuestObjectivesLocale();
+    sObjectMgr->LoadQuestOfferRewardLocale();
+    sObjectMgr->LoadQuestRequestItemsLocale();
     sObjectMgr->LoadNpcTextLocales();
     sObjectMgr->LoadPageTextLocales();
     sObjectMgr->LoadGossipMenuItemsLocales();
@@ -1928,7 +1935,7 @@ void World::SetInitialWorldSettings()
     sObjectMgr->LoadQuestObjectives();
 
     TC_LOG_INFO("server.loading", "Loading Quest Objective Locales...");
-    sObjectMgr->LoadQuestObjectiveLocales();
+    sObjectMgr->LoadQuestObjectivesLocale();
 
     TC_LOG_INFO("server.loading", "Loading Quest Objective Visual Effects...");
     sObjectMgr->LoadQuestObjectiveVisualEffects();
@@ -2230,6 +2237,9 @@ void World::SetInitialWorldSettings()
 
     m_timers[WUPDATE_DELETECHARS].SetInterval(DAY*IN_MILLISECONDS); // check for chars to delete every day
 
+    // for AhBot
+    m_timers[WUPDATE_AHBOT].SetInterval(getIntConfig(CONFIG_AHBOT_UPDATE_INTERVAL) * IN_MILLISECONDS); // every 20 sec
+
     m_timers[WUPDATE_PINGDB].SetInterval(getIntConfig(CONFIG_DB_PING_INTERVAL)*MINUTE*IN_MILLISECONDS);    // Mysql ping time in minutes
 
     m_timers[WUPDATE_GUILDSAVE].SetInterval(getIntConfig(CONFIG_GUILD_SAVE_INTERVAL) * MINUTE * IN_MILLISECONDS);
@@ -2264,6 +2274,9 @@ void World::SetInitialWorldSettings()
 
     // Delete all characters which have been deleted X days before
     Player::DeleteOldCharacters(true);
+
+    TC_LOG_INFO("server.loading", "Initialize AuctionHouseBot...");
+    sAuctionBot->Initialize();
 
     // Delete all custom channels which haven't been used for PreserveCustomChannelDuration days.
     Channel::CleanOldChannelsInDB();
@@ -2532,6 +2545,13 @@ void World::Update(uint32 diff)
         RecordTimeDiff(nullptr);
         sAuctionMgr->Update();
         RecordTimeDiff("AuctionMgr::Update");
+    }
+
+    /// <li> Handle AHBot operations
+    if (m_timers[WUPDATE_AHBOT].Passed())
+    {
+        sAuctionBot->Update();
+        m_timers[WUPDATE_AHBOT].Reset();
     }
 
     /// <li> Handle session updates when the timer has passed
@@ -5059,7 +5079,7 @@ void BonusRatesEntry::Update(time_t const& now, tm const& lt)
             return;
         }
 
-        if (shouldBeActive = schedule.Satisfies(lt))
+        if (shouldBeActive == schedule.Satisfies(lt))
             break;
     }
 

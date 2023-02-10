@@ -21,8 +21,8 @@
 #include <ace/Singleton.h>
 
 #include "Common.h"
-#include "DatabaseEnv.h"
 #include "DBCStructure.h"
+#include "DatabaseEnv.h"
 
 class Item;
 class Player;
@@ -62,6 +62,13 @@ enum MailAuctionAnswers
     AUCTION_CANCELLED_TO_BIDDER = 4,
     AUCTION_CANCELED            = 5,
     AUCTION_SALE_PENDING        = 6
+};
+
+enum AuctionHouses
+{
+    AUCTIONHOUSE_ALLIANCE       = 2,
+    AUCTIONHOUSE_HORDE          = 6,
+    AUCTIONHOUSE_NEUTRAL        = 7
 };
 
 struct AuctionEntry
@@ -151,7 +158,7 @@ class AuctionHouseObject
 
     void AddAuction(AuctionEntry* auction, bool skipLock = false);
 
-    bool RemoveAuction(AuctionEntry* auction, uint32 itemEntry, bool skipLock = false);
+    bool RemoveAuction(AuctionEntry* auction, bool skipLock = false);
 
     void Update();
 
